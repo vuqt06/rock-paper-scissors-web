@@ -6,11 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css">
     <script src="myscript.js"></script>
 </head>
 
 <body>
-
+    <div class="score-board">
+        <div class="player-track">
+            <div class="player-title">Player</div>
+            <div class="player-score">0</div>
+        </div>
+        <div class="computer-track">
+            <div class="computer-title">Computer</div>
+            <div class="computer-score">0</div>
+        </div>
+    </div>
+    <div class="round-status"></div>
+    <div class="buttons-container">
+        <button class="rock"></button>
+        <button class="paper"></button>
+        <button class="scissors"></button>
+    </div>
+    <div class="round-tracking">
+        <div class="round-results-title">Detail Results</div>
+        <div class="round-results">
+            <ul class="player-detail-result"></ul>
+            <ul class="computer-detail-result"></ul>
+        </div>
+    </div>
 </body>
 
 </html>

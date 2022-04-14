@@ -34,3 +34,5 @@ function game() {
     else if (playerScore < computerScore) return "You lose The Game!"
     else return "Draw! That Was Tight!";
 }
+
+let rockBtn = document.querySelector('.rock')
