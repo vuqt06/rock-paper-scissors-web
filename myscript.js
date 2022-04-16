@@ -35,4 +35,63 @@ function game() {
     else return "Draw! That Was Tight!";
 }
 
-let rockBtn = document.querySelector('.rock')
+function playRock(playerScore, computerScore, computerSelection) {
+    if (computerSelection == 'Paper') {
+        computerScore++;
+        return "You lose! Paper beats Rock!"
+    }
+    else if (computerSelection == 'Scissors') {
+        playerScore++;
+        return "You win! Rock beats Scissors!"
+    }
+    else {
+        return "Draw!";
+    }
+}
+
+function playPaper(playerScore, computerScore, computerSelection) {
+    if (computerSelection == 'Scissors') {
+        computerScore++;
+        return "You lose! Scissors beats Paper!"
+    }
+    else if (computerSelection == 'Rock') {
+        playerScore++;
+        return "You win! Paper beats Rock!"
+    }
+    else {
+        return "Draw!";
+    }
+}
+
+function playScissors(playerScore, computerScore, computerSelection) {
+    if (computerSelection == 'Rock') {
+        computerScore++;
+        return "You lose! Rock beats Scissors!"
+    }
+    else if (computerSelection == 'Paper') {
+        playerScore++;
+        return "You win! Scissors beats Paper!"
+    }
+    else {
+        return "Draw!";
+    }
+}
+
+
+let rockBtn = document.querySelector('.rock');
+let paperBtn = document.querySelector('.paper');
+let ScissorsBtn = document.querySelector('.scissors');
+let roundMsg = document.querySelector('.round-status');
+let playerScoreText = document.querySelector('.player-score');
+let computerScoreText = document.querySelector('.computer-score');
+
+let playerScore = 0;
+let computerScore = 0;
+
+rockBtn.addEventListener('click', (e) => {
+    roundMsg.textContent = roundMsg.textContent = playRock(playerScore, computerScore, computerMove());
+    playerScoreText.textContent = playerScore;
+    computerScoreText.textContent = computerScore;
+});
+//paperBtn.addEventListener('click', playRound('Paper', computerPlay()));
+//scissors.addEventListener('click', playRound('Scissors', computerPlay()));
