@@ -1,0 +1,107 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.score-board {
+    display: flex;
+    justify-content: space-around;
+    height: 20vh;
+    align-items: center;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-evenly;
+    height: 50vh;
+    align-items: center;
+}
+
+.round-tracking {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: fantasy;
+    font-weight: bold;
+    font-size: 3vh;
+}
+
+.player-track,
+.computer-track {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 5vh;
+    font-family: fantasy;
+}
+
+.round-status {
+    text-align: center;
+    font-size: 3vh;
+    font-family: fantasy;
+    font-weight: bold;
+}
+
+.rock-img,
+.paper-img,
+.scissors-img {
+    height: 30vh;
+    width: auto;
+}
+
+.rock-title,
+.paper-title,
+.scissors-title {
+    font-size: 3vh;
+    font-family: fantasy;
+}
+
+.round-results-title {
+    font-size: 4vh;
+}
+
+.rock,
+.paper,
+.scissors {
+    transition-duration: 0.5s;
+}
+
+.rock:hover,
+.paper:hover,
+.scissors:hover {
+    transform: translateY(-10px);
+}
+
+.rock:active,
+.paper:active,
+.scissors:active {
+    transform: scale(0.9);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+ul {
+    list-style-type: none;
+}

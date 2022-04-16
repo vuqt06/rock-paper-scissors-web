@@ -5,32 +5,117 @@ function computerPlay() {
     else return "Scissors";
 }
 
-function playRound(playerSelection, computerSelection) {
-    let printPlayerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.toLowerCase().slice(1);
-    if (playerSelection.toLowerCase() == "rock" && computerSelection == "Paper"
-        || playerSelection.toLowerCase() == "paper" && computerSelection == "Scissors"
-        || playerSelection.toLowerCase() == "scissors" && computerSelection == "Rock") return 'You Lose!' + computerSelection + ' beats ' + printPlayerSelection
-    else if (computerSelection == "Rock" && playerSelection.toLowerCase() == "paper"
-        || computerSelection == "Paper" && playerSelection.toLowerCase() == "scissors"
-        || computerSelection == "Scissors" && playerSelection.toLowerCase() == "rock") return 'You Win! ' + printPlayerSelection + ' beats ' + computerSelection
-    else if (computerSelection == "Paper" && playerSelection.toLowerCase() == "paper"
-        || computerSelection == "Scissors" && playerSelection.toLowerCase() == "scissors"
-        || computerSelection == "Rock" && playerSelection.toLowerCase() == "rock") return "Draw!";
-}
-
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt("Choose your move?");
-        let computerSelection = computerPlay();
-        let result = playRound(playerSelection, computerSelection);
-        console.log(result)
-        if (result.charAt(4) == 'W') playerScore++
-        else if (result.charAt(4) == 'L') computerScore++;
+function playRock(scores, computerSelection) {
+    if (computerSelection == 'Paper') {
+        scores[1]++;
+        return "You lose! Paper beats Rock!"
     }
-
-    if (playerScore > computerScore) return "You Win The Game!"
-    else if (playerScore < computerScore) return "You lose The Game!"
-    else return "Draw! That Was Tight!";
+    else if (computerSelection == 'Scissors') {
+        scores[0]++;
+        return "You win! Rock beats Scissors!"
+    }
+    else {
+        return "Draw!";
+    }
 }
+
+function playPaper(scores, computerSelection) {
+    if (computerSelection == 'Scissors') {
+        scores[1]++;
+        return "You lose! Scissors beats Paper!"
+    }
+    else if (computerSelection == 'Rock') {
+        scores[0]++;
+        return "You win! Paper beats Rock!"
+    }
+    else {
+        return "Draw!";
+    }
+}
+
+function playScissors(scores, computerSelection) {
+    if (computerSelection == 'Rock') {
+        scores[1]++;
+        return "You lose! Rock beats Scissors!"
+    }
+    else if (computerSelection == 'Paper') {
+        scores[0]++;
+        return "You win! Scissors beats Paper!"
+    }
+    else {
+        return "Draw!";
+    }
+}
+
+function checkWinner(scores, winnerSound, loserSound) {
+    if (scores[0] == 5) {
+        winnerSound.play();
+        if (confirm("Congratulations! You are the winner!")) {
+            window.location.reload();
+        }
+        else {
+            window.location.reload();
+        }
+    } else if (scores[1] == 5) {
+        loserSound.play();
+        if (confirm("Defeated! Don't give up!")) {
+            window.location.reload();
+        }
+        else {
+            window.location.reload();
+        }
+    }
+}
+
+let rockBtn = document.querySelector('.rock');
+let paperBtn = document.querySelector('.paper');
+let scissorsBtn = document.querySelector('.scissors');
+let roundMsg = document.querySelector('.round-status');
+let playerScoreText = document.querySelector('.player-score');
+let computerScoreText = document.querySelector('.computer-score');
+const clickSound = document.querySelector(`audio[data-key="76"]`);
+const winnerSound = document.querySelector(`audio[data-key="77"]`);
+const loserSound = document.querySelector(`audio[data-key="78"]`);
+let delayTime = 2000;
+
+let scores = [0, 0];
+
+rockBtn.addEventListener('click', () => {
+    clickSound.play();
+    let computerSelection = computerPlay();
+    roundMsg.textContent = roundMsg.textContent = playRock(scores, computerSelection);
+    playerScoreText.textContent = scores[0];
+    computerScoreText.textContent = scores[1];
+    let roudResult = document.createElement('li');
+    roudResult.textContent = `Rock - ${computerSelection}`;
+    let detailResultList = document.querySelector('.detail-results');
+    detailResultList.appendChild(roudResult);
+    setTimeout(checkWinner(scores, winnerSound, loserSound), delayTime);
+
+});
+
+paperBtn.addEventListener('click', () => {
+    clickSound.play();
+    let computerSelection = computerPlay();
+    roundMsg.textContent = roundMsg.textContent = playPaper(scores, computerSelection);
+    playerScoreText.textContent = scores[0];
+    computerScoreText.textContent = scores[1];
+    let roudResult = document.createElement('li');
+    roudResult.textContent = `Paper - ${computerSelection}`;
+    let detailResultList = document.querySelector('.detail-results');
+    detailResultList.appendChild(roudResult);
+    setTimeout(checkWinner(scores, winnerSound, loserSound), delayTime);
+});
+
+scissorsBtn.addEventListener('click', () => {
+    clickSound.play();
+    let computerSelection = computerPlay();
+    roundMsg.textContent = roundMsg.textContent = playScissors(scores, computerSelection);
+    playerScoreText.textContent = scores[0];
+    computerScoreText.textContent = scores[1];
+    let roudResult = document.createElement('li');
+    roudResult.textContent = `Scissors - ${computerSelection}`;
+    let detailResultList = document.querySelector('.detail-results');
+    detailResultList.appendChild(roudResult);
+    setTimeout(checkWinner(scores, winnerSound, loserSound), delayTime);
+});
